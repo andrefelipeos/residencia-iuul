@@ -1,4 +1,15 @@
-lines = ["2 4 5 1", "2", "1 2", "3 3", "2 4 3 2", "3", "1 1", "2 2", "3 3", "0 0 0 0"];
+lines = [
+    "2 4 5 1",
+    "2",
+    "1 2",
+    "3 3",
+    "2 4 3 2",
+    "3",
+    "1 1",
+    "2 2",
+    "3 3",
+    "0 0 0 0"
+];
 
 class Fazenda {
     constructor(x1, y1, x2, y2) {
@@ -7,13 +18,9 @@ class Fazenda {
         this.x2 = x2;
         this.y2 = y2;
     }
-    
+
     pontoInterno(x, y) {
-        if ((x >= this.x1 && x <= this.x2) && (y <= this.y1 && y >= this.y2)) {
-            return true;
-        } else {
-            return false;
-        }
+        return x >= this.x1 && x <= this.x2 && y <= this.y1 && y >= this.y2;
     }
 }
 

@@ -36,6 +36,14 @@ let entrada2 = [
     "1 5"
 ] // 2
 
+let saida2 = [
+    "..XXX",
+    ".....",
+    "#####",
+    ".....",
+    "XO##."
+]
+
 let entrada3 = [
     "7 7",
     ".#....#",
@@ -56,12 +64,22 @@ let entrada3 = [
     "6 2"
 ] // 1
 
-let lines = entrada1;
+let saida3 = [
+    "OX....#",
+    "XXX..##",
+    ".X....#",
+    "....#.#",
+    ".X..#.#",
+    ".X###.#",
+    "......."
+]
+
+let lines = entrada3;
 
 class Tabuleiro {
     constructor(linhas, colunas) {
-        this.numero_de_linhas = linhas;
-        this.numero_de_colunas = colunas;
+        this.numeroDeLinhas = linhas;
+        this.numeroDeColunas = colunas;
         this.naviosDestruidos = 0;
     }
 
@@ -70,8 +88,8 @@ class Tabuleiro {
     }
 
     atacarPosicao(linha, coluna) {
-        linha--;
-        coluna--;
+        linha = linha - 1;
+        coluna = coluna - 1;
         if (this.tabuleiro[linha][coluna] === ".") {
             this.tabuleiro[linha][coluna] = "O";
         } else {
@@ -90,29 +108,27 @@ class Tabuleiro {
 
         // verifica lado direito
         indice = coluna + 1;
-        while (indice < this.numero_de_colunas
+        while (indice < this.numeroDeColunas
             && this.tabuleiro[linha][indice] === "X") indice++;
-        if (indice < this.numero_de_colunas
+        if (indice < this.numeroDeColunas
             && this.tabuleiro[linha][indice] === "#") return false;
         
         return true;
     }
 
     imprimir() {
-        console.log(this.tabuleiro);
+        this.tabuleiro.forEach(linha => {
+            console.log(linha.join(""));
+        });
     }
 }
 
-/*
-    N: número de linhas
-    M: número de colunas
-*/
 let N, M;
 [N, M] = lines.shift().split(" ").map((s) => parseInt(s));
 let tabuleiro = new Tabuleiro(N, M);
 tabuleiro.preencher(lines.splice(0, N));
 let tabuleiro2 = new Tabuleiro(N, M);
-tabuleiro2.preencher(saida1);
+tabuleiro2.preencher(saida3);
 
 console.log("Tabuleiro inicial:");
 tabuleiro.imprimir()

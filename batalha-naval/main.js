@@ -76,14 +76,14 @@ let saida3 = [
 
 let lines = entrada3;
 
-class Tabuleiro {
+class BatalhaNaval {
     constructor(linhas, colunas) {
         this.numeroDeLinhas = linhas;
         this.numeroDeColunas = colunas;
         this.naviosDestruidos = 0;
     }
 
-    preencher(mapeamento) {
+    preencherTabuleiro(mapeamento) {
         this.tabuleiro = mapeamento.map(linha => linha.split(""));
     }
 
@@ -94,26 +94,36 @@ class Tabuleiro {
             this.tabuleiro[linha][coluna] = "O";
         } else {
             this.tabuleiro[linha][coluna] = "X";
-            if (this.destruiuNavio(linha, coluna)) {
+            if (this.navioDestruido(linha, coluna)) {
                 this.naviosDestruidos++;
             }
         }
     }
 
-    destruiuNavio(linha, coluna) {
-        // verifica lado esquerdo
-        let indice = coluna - 1;
-        while (indice >= 0 && this.tabuleiro[linha][indice] === "X") indice--;
-        if (indice >= 0 && this.tabuleiro[linha][indice] === "#") return false;
+    navioDestruido(linha, coluna) {
+        if (this.existeNavioFuncionalAdjacente(linha, coluna)) {
+            return false;
+        }
+    }
 
-        // verifica lado direito
-        indice = coluna + 1;
-        while (indice < this.numeroDeColunas
-            && this.tabuleiro[linha][indice] === "X") indice++;
-        if (indice < this.numeroDeColunas
-            && this.tabuleiro[linha][indice] === "#") return false;
-        
-        return true;
+    existeNavioFuncionalAdjacente(linha, coluna) {
+        if ((this.coordenadasSaoValidas(linha - 1, coluna)
+            && this.tabuleiro[linha - 1][coluna] === "#")
+            || (this.coordenadasSaoValidas(linha, coluna - 1)
+            && this.tabuleiro[linha][coluna - 1] === "#")
+            || (this.coordenadasSaoValidas(linha - 1, coluna)
+            && this.tabuleiro[linha][coluna + 1] === "#")
+            || (this.coordenadasSaoValidas(linha - 1, coluna)
+            && this.tabuleiro[linha + 1][coluna] === "#"))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    coordenadasSaoValidas(linha, coluna) {
+        return linha >= 0 && linha < this.numeroDeLinhas
+            && coluna >= 0 && coluna < this.numeroDeColunas;
     }
 
     imprimir() {
@@ -125,10 +135,10 @@ class Tabuleiro {
 
 let N, M;
 [N, M] = lines.shift().split(" ").map((s) => parseInt(s));
-let tabuleiro = new Tabuleiro(N, M);
-tabuleiro.preencher(lines.splice(0, N));
-let tabuleiro2 = new Tabuleiro(N, M);
-tabuleiro2.preencher(saida3);
+let tabuleiro = new BatalhaNaval(N, M);
+tabuleiro.preencherTabuleiro(lines.splice(0, N));
+let tabuleiro2 = new BatalhaNaval(N, M);
+tabuleiro2.preencherTabuleiro(saida3);
 
 console.log("Tabuleiro inicial:");
 tabuleiro.imprimir()

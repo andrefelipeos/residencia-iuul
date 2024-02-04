@@ -139,21 +139,6 @@ class BatalhaNaval {
         return true;
     }
 
-    navioDestruido2(linha, coluna) {
-        if (this.existeNavioFuncionalAdjacente(linha, coluna)) {
-            return false;
-        }
-
-        this.marcaPosicao(linha, coluna);
-        for (const posicao of this.posicoesVizinhas(linha, coluna)) {
-            if (!this.navioDestruido(posicao.linha, posicao.coluna)) {
-                return false;
-            }
-        }
-        this.desmarcaPosicao(linha, coluna);
-        return true;
-    }
-
     posicoesVizinhas(linha, coluna) {
         let posições = [];
         if (linha - 1 >= 0 && linha - 1 < this.numeroDeLinhas
@@ -177,21 +162,6 @@ class BatalhaNaval {
             posições.push({ linha: linha + 1, coluna })
         }
         return posições;
-    }
-
-    existeNavioFuncionalAdjacente(linha, coluna) {
-        if ((this.coordenadasSaoValidas(linha - 1, coluna)
-            && this.tabuleiro[linha - 1][coluna] === "#")
-            || (this.coordenadasSaoValidas(linha, coluna - 1)
-            && this.tabuleiro[linha][coluna - 1] === "#")
-            || (this.coordenadasSaoValidas(linha - 1, coluna)
-            && this.tabuleiro[linha][coluna + 1] === "#")
-            || (this.coordenadasSaoValidas(linha - 1, coluna)
-            && this.tabuleiro[linha + 1][coluna] === "#"))
-        {
-            return true;
-        }
-        return false;
     }
 
     coordenadasSaoValidas(linha, coluna) {
@@ -218,10 +188,10 @@ tabuleiro.imprimir()
 console.log("Tabuleiro esperado no final:");
 tabuleiro2.imprimir();
 
-const quantidade_de_disparos = parseInt(linhas.shift());
+const quantidadeDeDisparos = parseInt(linhas.shift());
 
 let linha, coluna;
-for (let index = 0; index < quantidade_de_disparos; index++) {
+for (let index = 0; index < quantidadeDeDisparos; index++) {
     [linha, coluna] = linhas[index].split(" ").map((s) => parseInt(s));
     tabuleiro.atacarPosicao(linha, coluna);
 }

@@ -74,7 +74,7 @@ let saida3 = [
     "......."
 ]
 
-let lines = entrada3;
+let linhas = entrada3;
 
 class BatalhaNaval {
     constructor(linhas, colunas) {
@@ -90,9 +90,7 @@ class BatalhaNaval {
     atacarPosicao(linha, coluna) {
         linha = linha - 1;
         coluna = coluna - 1;
-        if (this.tabuleiro[linha][coluna] === ".") {
-            this.tabuleiro[linha][coluna] = "O";
-        } else {
+        if (this.tabuleiro[linha][coluna] === "#") {
             this.tabuleiro[linha][coluna] = "X";
             if (this.navioDestruido(linha, coluna)) {
                 this.naviosDestruidos++;
@@ -101,9 +99,84 @@ class BatalhaNaval {
     }
 
     navioDestruido(linha, coluna) {
+        // verifica se a posição é válida para esse tabuleiro
+        if (!this.coordenadasSaoValidas(linha, coluna)) {
+            throw `A posição (${linha}, ${coluna}) não está no tabuleiro
+                (${this.numeroDeLinhas} x ${this.numeroDeColunas}).`;
+        }
+        // verifica se posição não é água (e, sim, um navio)
+        if (this.tabuleiro[linha][coluna] === ".") {
+            throw `A posição (${linha}, ${coluna}) não é parte de um navio.`;
+        }
+        // se a posição for um navio em bom estado, o navio não foi destruido
+        if (this.tabuleiro[linha][coluna] === "#") {
+            return false;
+        }
+        // verifica se alguma das posições adjacentes é parte de um navio
+        // em bom estado
+        const posicoesVizinhas = this.posicoesVizinhas(linha, coluna)
+        for (const posicao of posicoesVizinhas) {
+            if (this.tabuleiro[posicao.linha][posicao.coluna] === "#") {
+                return false;
+            }
+        }
+        // para verificar todos os lados recursivamente, a posição base é
+        // marcada para evitar um loop infinito na recursão
+        this.tabuleiro[linha][coluna] = "x";
+        for (const posicao of posicoesVizinhas) {
+            if (this.tabuleiro[posicao.linha][posicao.coluna] === "X") {
+                // caso um dos ramos não foi completamente destruído, desmarca
+                // a posição e retorna false (o navio não foi destruído)
+                if (!this.navioDestruido(posicao.linha, posicao.coluna)) {
+                    this.tabuleiro[linha][coluna] = "X";
+                    return false;
+                }
+            }
+        }
+        // se todos os ramos do navio foram destruídos, desmarca a posição e
+        // retorna true (o navio foi destruído)
+        this.tabuleiro[linha][coluna] = "X";
+        return true;
+    }
+
+    navioDestruido2(linha, coluna) {
         if (this.existeNavioFuncionalAdjacente(linha, coluna)) {
             return false;
         }
+
+        this.marcaPosicao(linha, coluna);
+        for (const posicao of this.posicoesVizinhas(linha, coluna)) {
+            if (!this.navioDestruido(posicao.linha, posicao.coluna)) {
+                return false;
+            }
+        }
+        this.desmarcaPosicao(linha, coluna);
+        return true;
+    }
+
+    posicoesVizinhas(linha, coluna) {
+        let posições = [];
+        if (linha - 1 >= 0 && linha - 1 < this.numeroDeLinhas
+            && coluna >= 0 && coluna < this.numeroDeColunas)
+        {
+            posições.push({ linha: linha - 1, coluna })
+        }
+        if (linha >= 0 && linha < this.numeroDeLinhas
+            && coluna - 1 >= 0 && coluna - 1 < this.numeroDeColunas)
+        {
+            posições.push({ linha, coluna: coluna - 1 })
+        }
+        if (linha >= 0 && linha < this.numeroDeLinhas
+            && coluna + 1 >= 0 && coluna + 1 < this.numeroDeColunas)
+        {
+            posições.push({ linha, coluna: coluna + 1 })
+        }
+        if (linha + 1 >= 0 && linha + 1 < this.numeroDeLinhas
+            && coluna >= 0 && coluna < this.numeroDeColunas)
+        {
+            posições.push({ linha: linha + 1, coluna })
+        }
+        return posições;
     }
 
     existeNavioFuncionalAdjacente(linha, coluna) {
@@ -134,9 +207,9 @@ class BatalhaNaval {
 }
 
 let N, M;
-[N, M] = lines.shift().split(" ").map((s) => parseInt(s));
+[N, M] = linhas.shift().split(" ").map((s) => parseInt(s));
 let tabuleiro = new BatalhaNaval(N, M);
-tabuleiro.preencherTabuleiro(lines.splice(0, N));
+tabuleiro.preencherTabuleiro(linhas.splice(0, N));
 let tabuleiro2 = new BatalhaNaval(N, M);
 tabuleiro2.preencherTabuleiro(saida3);
 
@@ -145,11 +218,11 @@ tabuleiro.imprimir()
 console.log("Tabuleiro esperado no final:");
 tabuleiro2.imprimir();
 
-const quantidade_de_disparos = parseInt(lines.shift());
+const quantidade_de_disparos = parseInt(linhas.shift());
 
 let linha, coluna;
 for (let index = 0; index < quantidade_de_disparos; index++) {
-    [linha, coluna] = lines[index].split(" ").map((s) => parseInt(s));
+    [linha, coluna] = linhas[index].split(" ").map((s) => parseInt(s));
     tabuleiro.atacarPosicao(linha, coluna);
 }
 

@@ -1,23 +1,38 @@
+import { Vertice } from "./questao1";
+
 class Poligono {
   #vertices = [];
 
-  constructor(vertices) {
-    if (vertices.length < 3) {
+  constructor() {
+    if (arguments.length < 3) {
       throw "Polígono deve ter pelo menos três vértices";
     }
-    vertices.forEach(v => this.#vertices.push(v));
+    this.#vertices.push(...arguments);
+  }
+
+  get vertices() {
+    return this.#vertices;
   }
 
   addVertice(novoVertice) {
     if (this.#vertices.includes(novoVertice)) {
       return false;
+    } else {
+      this.#vertices.push(novoVertice);
+      return true;
     }
-    this.#vertices.push(novoVertice);
-    return true;
   }
 
+  /*
+  * Esse método supõe que os vértices estão armazenados seguindo uma
+  * ordem de "desenho" do polígono.
+  */
   get perimetro() {
-    return 0;
+    let perimetro = this.#vertices[0].distancia(this.#vertices[this.#vertices.length-1]);
+    for (let i = 0; i < this.#vertices.length-1; i++) {
+      perimetro += this.#vertices[i].distancia(this.#vertices[i+1]);
+    }
+    return perimetro;
   }
 
   get qtdVertices() {

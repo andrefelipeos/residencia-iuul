@@ -1,4 +1,4 @@
-class Vertice {
+export class Vertice {
   #x;
   #y;
 
@@ -16,8 +16,8 @@ class Vertice {
   }
 
   distancia(outroVertice) {
-    deltaX = outroVertice.x - this.x;
-    deltaY = outroVertice.y - this.y;
+    const deltaX = outroVertice.x - this.x;
+    const deltaY = outroVertice.y - this.y;
     return Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
   }
 

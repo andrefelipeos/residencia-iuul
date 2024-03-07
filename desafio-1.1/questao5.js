@@ -12,7 +12,7 @@ while (nome.length < 5) {
 
 /* CPF */
 let cpf = await rl.question("CPF: ");
-while (!/[0-9]{11}/.test(cpf)) {
+while (!/^[0-9]{11}$/.test(cpf)) {
   console.log("O CPF deve ter exatamente onze dígitos.");
   cpf = await rl.question("CPF: ");
 }
@@ -33,7 +33,7 @@ let rendaMensal = await rl.question("Renda Mensal: ");
 
 /* Estado Civil */
 let estadoCivil = await rl.question("Estado Civil: ");
-while (!['c', 's', 'v', 'd'].includes(estadoCivil.toLowerCase())) {
+while (!/^(c|s|v|d)$/.test(estadoCivil.toLowerCase())) {
   console.log("O estado civil deve estar entre as seguintes letras, em maiúsculo ou minúsculo: C, S, V e D.");
   estadoCivil = await rl.question("Estado Civil: ");
 }
@@ -51,7 +51,7 @@ console.log("Nome: " + nome);
 console.log("CPF: " + cpf);
 console.log("Data: " + dataDeNascimento);
 console.log("Renda: " + rendaMensal);
-console.log("Estado Civil: " + estadoCivil);
+console.log("Estado Civil: " + estadoCivil.toUpperCase());
 console.log("Dependentes: " + dependentes);
 
 function formatoValido(data) {

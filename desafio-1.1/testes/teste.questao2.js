@@ -36,22 +36,22 @@ v3 = new Vertice(x, y);
 t2 = new Triangulo(v1, v2, v3);
 console.log("Segundo triângulo criado...");
 
-console.log("O triângulo t1 xé igual ao triângulo t2.".replace("x", t1.equals(t2) ? "" : "não "));
-console.log("O perimetro do triângulo t1 é " + t1.perimetro);
-console.log("O perimetro do triângulo t2 é " + t2.perimetro);
-console.log("O triângulo t1 é um triângulo " + t1.tipo());
-console.log("O triângulo t2 é um triângulo " + t2.tipo());
-console.log("A área do triângulo t1 é " + t1.area());
-console.log("A área do triângulo t2 é " + t2.area());
+console.log("O triângulo t1 %s igual ao triângulo t2.", t1.equals(t2) ? "é" : "não é");
+console.log("O perimetro do triângulo t1 é ", t1.perimetro);
+console.log("O perimetro do triângulo t2 é ", t2.perimetro);
+console.log("O triângulo t1 é um triângulo ", t1.tipo());
+console.log("O triângulo t2 é um triângulo ", t2.tipo());
+console.log("A área do triângulo t1 é ", t1.area());
+console.log("A área do triângulo t2 é ", t2.area());
 
 console.log("Clonando t1 como t3...");
 let t3 = t1.clone();
 console.log("Clonando t2 como t4...");
 let t4 = t2.clone();
 
-console.log("O triângulo t3 xé igual ao triângulo t1.".replace("x", t3.equals(t1) ? "" : "não "));
-console.log("O triângulo t3 xé igual ao triângulo t2.".replace("x", t3.equals(t2) ? "" : "não "));
-console.log("O triângulo t4 xé igual ao triângulo t1.".replace("x", t4.equals(t1) ? "" : "não "));
-console.log("O triângulo t4 xé igual ao triângulo t2.".replace("x", t4.equals(t2) ? "" : "não "));
+console.log("O triângulo t3 %s igual ao triângulo t1.", t3.equals(t1) ? "é" : "não é");
+console.log("O triângulo t3 %s igual ao triângulo t2.", t3.equals(t2) ? "é" : "não é");
+console.log("O triângulo t4 %s igual ao triângulo t1.", t4.equals(t1) ? "é" : "não é");
+console.log("O triângulo t4 %s igual ao triângulo t2.", t4.equals(t2) ? "é" : "não é");
 
 rl.close();

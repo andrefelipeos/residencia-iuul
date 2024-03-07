@@ -1,6 +1,4 @@
-import { Vertice } from "./questao1.js";
-
-class Poligono {
+export class Poligono {
   #vertices = [];
 
   constructor() {
@@ -39,16 +37,3 @@ class Poligono {
     return this.#vertices.length;
   }
 }
-
-let v1, v2, v3, v4;
-v1 = new Vertice(3, 5);
-v2 = new Vertice(8, 5);
-v3 = new Vertice(7, 2);
-v4 = new Vertice(2, 2);
-
-let poligono = new Poligono(v1, v2, v3);
-console.log("O perimetro do poligono é: " + poligono.perimetro);
-console.log("O poligono tem " + poligono.qtdVertices + " vertices.");
-poligono.addVertice(v4);
-console.log("O perimetro do poligono é: " + poligono.perimetro);
-console.log("O poligono tem " + poligono.qtdVertices + " vertices.");

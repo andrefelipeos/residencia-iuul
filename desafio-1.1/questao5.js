@@ -18,18 +18,22 @@ while (!/^[0-9]{11}$/.test(cpf)) {
 }
 
 /* Data de Nascimento */
-let dataDeNascimento = await rl.question("Data de nascimento: ");
+let dataDeNascimento = await rl.question("Data de Nascimento: ");
 while (!formatoValido(dataDeNascimento) || !maiorDeIdade(dataDeNascimento)) {
   if (!formatoValido(dataDeNascimento)) {
     console.log("A data deve estar no formato DD/MM/AAAA.");
   } else {
     console.log("A data deve ser pelo menos 18 anos atrás.");
   }
-  dataDeNascimento = await rl.question("Data de nascimento: ");
+  dataDeNascimento = await rl.question("Data de Nascimento: ");
 }
 
 /* Renda Mensal */
 let rendaMensal = await rl.question("Renda Mensal: ");
+while (!/^[0-9]+,[0-9]{2}$/.test(rendaMensal)) {
+  console.log("Insira um valor númerico com duas casas decimais após a vírgula.");
+  rendaMensal = await rl.question("Renda Mensal: ");
+}
 
 /* Estado Civil */
 let estadoCivil = await rl.question("Estado Civil: ");
@@ -74,7 +78,7 @@ function calculaIdade(data) {
     hoje.getMonth() < data.getMonth()
     || (hoje.getMonth() === data.getMonth() && hoje.getDate() < data.getDate())
   ) {
-    idade--;
+    return idade - 1;
   }
   return idade;
 }

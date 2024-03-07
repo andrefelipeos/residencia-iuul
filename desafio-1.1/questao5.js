@@ -51,13 +51,21 @@ while (dependentes < 0 || dependentes > 10) {
 
 rl.close();
 
-console.log("Nome: " + nome);
-console.log("CPF: " + mascaraCpf(cpf));
-console.log("Data: " + dataDeNascimento);
-console.log("Renda: " + rendaMensal);
-console.log("Estado Civil: " + estadoCivil.toUpperCase());
-console.log("Dependentes: " + dependentes);
 
+/* Testes */
+const [dia, mes, ano] = dataDeNascimento.split('/');
+const data = new Date(ano, mes, dia);
+console.log("-----------------------------------");
+console.log(" Nome: " + nome);
+console.log(" CPF: " + mascaraCpf(cpf));
+console.log(" Data de Nascimento: " + data.toLocaleDateString());
+console.log(" Renda: " + parseFloat(rendaMensal.replace(",", ".")));
+console.log(" Estado Civil: " + estadoCivil.toUpperCase());
+console.log(" Número de Dependentes: " + dependentes);
+console.log("-----------------------------------");
+
+
+/* Funções auxiliares */
 function formatoValido(data) {
   if (!/^[0-9]{2}\/[0-9]{2}\/[0-9]{4}/.test(data)) {
     return false;

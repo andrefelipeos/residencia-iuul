@@ -12,7 +12,7 @@ while (nome.length < 5) {
 
 /* CPF */
 let cpf = await rl.question("CPF: ");
-while (!/^[0-9]{11}$/.test(cpf)) {
+while (!cpfValido(cpf)) {
   console.log("O CPF deve ter exatamente onze dígitos.");
   cpf = await rl.question("CPF: ");
 }
@@ -52,7 +52,7 @@ while (dependentes < 0 || dependentes > 10) {
 rl.close();
 
 console.log("Nome: " + nome);
-console.log("CPF: " + cpf);
+console.log("CPF: " + mascaraCpf(cpf));
 console.log("Data: " + dataDeNascimento);
 console.log("Renda: " + rendaMensal);
 console.log("Estado Civil: " + estadoCivil.toUpperCase());
@@ -81,4 +81,15 @@ function calculaIdade(data) {
     return idade - 1;
   }
   return idade;
+}
+
+function mascaraCpf(cpf) {
+  if (!cpfValido(cpf)) {
+    throw "O CPF deve ser formado por exatamente onze dígitos."
+  }
+  return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"\$1.\$2.\$3\-\$4");
+}
+
+function cpfValido(cpf) {
+  return /^[0-9]{11}$/.test(cpf);
 }

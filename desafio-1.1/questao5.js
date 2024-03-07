@@ -9,9 +9,9 @@ while (nome.length < 5) {
   nome = await rl.question("Nome: ");
 }
 let cpf = await rl.question("CPF: ");
-while (/^[0-9]{11}$/.test(cpf)) {
+while (!/[0-9]{11}/.test(cpf)) {
   console.log("O CPF deve ter exatamente onze dígitos.");
-  nome = await rl.question("CPF: ");
+  cpf = await rl.question("CPF: ");
 }
 let dataDeNascimento = await rl.question("Data de nascimento: ");
 while (!dataValida(dataDeNascimento) || !maiorDeIdade(dataDeNascimento)) {

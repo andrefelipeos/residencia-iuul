@@ -4,4 +4,6 @@ import { MenuPrincipal } from "./visoes/MenuPrincipal.js";
 
 BancoDeDados.agendas.push(new Agenda())
 const menu = new MenuPrincipal();
-menu.iniciar();
+await menu.iniciar();
+console.log("Encerrando a aplicação...");
+process.exit();

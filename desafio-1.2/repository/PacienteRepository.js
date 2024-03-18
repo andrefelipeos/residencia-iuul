@@ -8,4 +8,8 @@ export class PacienteRepository {
   getAll() {
     return BancoDeDados.agendas[0].pacientes;
   }
+
+  delete(cpf) {
+    BancoDeDados.agendas[0].excluirPaciente(cpf);
+  }
 }

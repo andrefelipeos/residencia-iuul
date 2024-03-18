@@ -12,4 +12,8 @@ export class ControladorDePacientes {
   recuperarListaDePacientes() {
     return this.#pacienteRepository.getAll();
   }
+
+  excluirPaciente(cpf) {
+    this.#pacienteRepository.delete(cpf);
+  }
 }

@@ -1,16 +1,20 @@
 import * as readline from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
-//inclusão de um paciente
+
 import { ControladorDePacientes } from "../controladores/ControladorDePacientes.js";
 
-const rl = readline.createInterface({ input, output });
-
 export class MenuPrincipal {
+  #rl = readline.createInterface({ input, output });
   #pacienteController = new ControladorDePacientes();
+
   async iniciar() {
-    this.#listarOpcoes();
-    let escolha = await rl.question("O que você quer fazer? ");
-    if (escolha === "1") this.#gerenciamentoDePacientes();
+    while (true) {
+      console.log("\nentrou aqui\n")
+      this.#listarOpcoes();
+      let escolha = await this.#rl.question("O que você quer fazer? ");
+      if (escolha === "1") await this.#gerenciamentoDePacientes();
+      if (escolha === "3") break;
+    }
   }
 
   #listarOpcoes() {
@@ -23,14 +27,30 @@ export class MenuPrincipal {
   async #gerenciamentoDePacientes() {
     console.log("Gerenciamento de Pacientes");
     console.log("1-Cadastrar novo paciente");
-    let escolha = await rl.question("O que você quer fazer? ");
-    if (escolha === "1") this.#cadastrarNovoPaciente();
+    console.log("2-Listar todos os pacientes");
+    console.log("3-Descadastrar um paciente");
+    let escolha = await this.#rl.question("O que você quer fazer? ");
+    if (escolha === "1") await this.#cadastrarNovoPaciente();
+    if (escolha === "2") await this.#listarTodosOsPacientes();
+    if (escolha === "3") await this.#removerUmPaciente();
   }
 
   async #cadastrarNovoPaciente() {
-    const nome = await rl.question("Nome: ");
-    const cpf = await rl.question("CPF: ");
-    const dataDeNascimento = await rl.question("Data de nascimento: ");
+    const nome = await this.#rl.question("Nome: ");
+    const cpf = await this.#rl.question("CPF: ");
+    const dataDeNascimento = await this.#rl.question("Data de nascimento: ");
     this.#pacienteController.adicionar(nome, cpf, dataDeNascimento);
+  }
+
+  async #listarTodosOsPacientes() {
+    const pacientes = this.#pacienteController.recuperarListaDePacientes();
+    pacientes.forEach(paciente => {
+      console.log(paciente.nome, paciente.cpf, paciente.dataDeNascimento);
+    });
+  }
+
+  async #removerUmPaciente() {
+    const cpf = await this.#rl.question("CPF: ");
+    this.#pacienteController.excluirPaciente(cpf);
   }
 }

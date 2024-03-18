@@ -2,15 +2,15 @@ import * as readline from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
 
 import { ControladorDePacientes } from "../controladores/ControladorDePacientes.js";
+import { MenuAgendamentos } from './MenuAgendamentos.js';
 
 export class MenuPrincipal {
   #rl = readline.createInterface({ input, output });
   #pacienteController = new ControladorDePacientes();
-  #menuAgendamento = new MenuAgendamento(this.#rl);
+  #menuAgendamento = new MenuAgendamentos(this.#rl);
 
   async iniciar() {
     while (true) {
-      console.log("\nentrou aqui\n")
       this.#listarOpcoes();
       let escolha = await this.#rl.question("O que você quer fazer? ");
       if (escolha === "1") await this.#gerenciamentoDePacientes();

@@ -1,6 +1,6 @@
 import { ControladorDeAgendamento } from "../controladores/ControladorDeAgendamento.js";
 
-export class MenuAgendamento {
+export class MenuAgendamentos {
   #rl;
   #agendamentoController = new ControladorDeAgendamento();
 

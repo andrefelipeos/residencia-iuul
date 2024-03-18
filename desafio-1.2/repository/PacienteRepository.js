@@ -1,15 +1,15 @@
 import { BancoDeDados } from "../BancoDeDados.js";
 
 export class PacienteRepository {
-  create(paciente) {
-    BancoDeDados.agendas[0].incluirPaciente(paciente);
+  cadastrar(paciente) {
+    BancoDeDados.pacientes.push(paciente);
   }
 
-  getAll() {
-    return BancoDeDados.agendas[0].pacientes;
+  excluir(cpf) {
+    BancoDeDados.pacientes = BancoDeDados.pacientes.filter(paciente => paciente.cpf != cpf);
   }
 
-  delete(cpf) {
-    BancoDeDados.agendas[0].excluirPaciente(cpf);
+  recuperarTodos() {
+    return BancoDeDados.pacientes;
   }
 }

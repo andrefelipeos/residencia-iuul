@@ -1,12 +1,12 @@
 export class Paciente {
   #nome;
   #cpf;
-  #dataNascimento;
+  #dataDeNascimento;
 
   constructor(nome, cpf, data) {
     this.#nome = nome;
     this.#cpf = cpf;
-    this.#dataNascimento = data;
+    this.#dataDeNascimento = data;
   }
 
   get nome() {
@@ -17,7 +17,7 @@ export class Paciente {
     return this.#cpf;
   }
 
-  get dataNascimento() {
-    return this.#dataNascimento;
+  get dataDeNascimento() {
+    return this.#dataDeNascimento;
   }
 }

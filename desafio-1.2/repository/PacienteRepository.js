@@ -4,4 +4,8 @@ export class PacienteRepository {
   create(paciente) {
     BancoDeDados.agendas[0].incluirPaciente(paciente);
   }
+
+  getAll() {
+    return BancoDeDados.agendas[0].pacientes;
+  }
 }

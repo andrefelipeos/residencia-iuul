@@ -8,4 +8,8 @@ export class ControladorDePacientes {
     let novoPaciente = new Paciente(nome, cpf, data);
     this.#pacienteRepository.create(novoPaciente);
   }
+
+  recuperarListaDePacientes() {
+    return this.#pacienteRepository.getAll();
+  }
 }

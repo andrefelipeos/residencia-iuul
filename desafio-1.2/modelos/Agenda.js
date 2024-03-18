@@ -2,6 +2,14 @@ export class Agenda {
   #pacientes = [];
   #consultas = [];
 
+  get pacientes() {
+    return this.#pacientes;
+  }
+
+  get consultas() {
+    return this.#consultas;
+  }
+
   incluirPaciente(paciente) {
     this.#pacientes.push(paciente);
   }

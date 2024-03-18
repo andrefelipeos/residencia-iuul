@@ -6,6 +6,7 @@ import { ControladorDePacientes } from "../controladores/ControladorDePacientes.
 export class MenuPrincipal {
   #rl = readline.createInterface({ input, output });
   #pacienteController = new ControladorDePacientes();
+  #menuAgendamento = new MenuAgendamento(this.#rl);
 
   async iniciar() {
     while (true) {
@@ -13,6 +14,7 @@ export class MenuPrincipal {
       this.#listarOpcoes();
       let escolha = await this.#rl.question("O que você quer fazer? ");
       if (escolha === "1") await this.#gerenciamentoDePacientes();
+      if (escolha === "2") await this.#menuAgendamento.executar();
       if (escolha === "3") break;
     }
   }

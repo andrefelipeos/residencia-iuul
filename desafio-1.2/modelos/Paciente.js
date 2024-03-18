@@ -3,7 +3,7 @@ export class Paciente {
   #cpf;
   #dataNascimento;
 
-  constructor() {
+  constructor(nome, cpf, data) {
     this.#nome = nome;
     this.#cpf = cpf;
     this.#dataNascimento = data;

@@ -17,6 +17,7 @@ export class MenuPrincipal {
       if (escolha === "2") await this.#menuConsultas.executar();
       if (escolha === "3") break;
     }
+    this.#rl.close();
   }
 
   #listarOpcoes() {

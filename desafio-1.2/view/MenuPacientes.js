@@ -1,8 +1,8 @@
-import { ControladorDePacientes } from "../controladores/ControladorDePacientes.js";
+import { PacientesController } from "../controller/PacientesController.js";
 
 export class MenuPacientes {
   #rl;
-  #pacientesController = new ControladorDePacientes();
+  #pacientesController = new PacientesController();
 
   constructor(readliner) {
     this.#rl = readliner;

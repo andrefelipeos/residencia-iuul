@@ -1,8 +1,8 @@
-import { ControladorDeAgendamento } from "../controladores/ControladorDeAgendamento.js";
+import { ConsultasController } from "../controller/ConsultasController.js";
 
-export class MenuAgendamentos {
+export class MenuConsultas {
   #rl;
-  #agendamentoController = new ControladorDeAgendamento();
+  #consultasController = new ConsultasController();
 
   constructor(readliner) {
     this.#rl = readliner;
@@ -28,11 +28,11 @@ export class MenuAgendamentos {
     const data = await this.#rl.question("Qual a data da consulta? ");
     const horaInicial = await this.#rl.question("Que horas começa a consulta? ");
     const horaFinal = await this.#rl.question("Que horas termina a consulta? ");
-    this.#agendamentoController.cadastrarAgendamento(cpf, data, horaInicial, horaFinal);
+    this.#consultasController.cadastrarAgendamento(cpf, data, horaInicial, horaFinal);
   }
 
   async #listarConsultas() {
-    const consultas = this.#agendamentoController.listarAgendamentos();
+    const consultas = this.#consultasController.listarAgendamentos();
     consultas.forEach(consulta => {
       console.log(consulta.cpf, consulta.data, consulta.horaInicial, consulta.horaFinal);
     })
@@ -42,6 +42,6 @@ export class MenuAgendamentos {
     const cpf = await this.#rl.question("Qual o CPF do paciente? ");
     const data = await this.#rl.question("Qual a data da consulta? ");
     const hora = await this.#rl.question("Qual o horário da consulta? ");
-    this.#agendamentoController.removerAgendamento(cpf, data, hora);
+    this.#consultasController.removerAgendamento(cpf, data, hora);
   }
 }

@@ -1,6 +1,6 @@
 import { BancoDeDados } from "../BancoDeDados.js";
 
-export class PacienteRepository {
+export class PacientesRepository {
   cadastrar(paciente) {
     BancoDeDados.pacientes.push(paciente);
   }

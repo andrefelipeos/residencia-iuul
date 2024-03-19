@@ -1,7 +1,7 @@
-import { Consulta } from "../modelos/Consulta.js";
+import { Consulta } from "../model/Consulta.js";
 import { ConsultasRepository } from "../repository/ConsultasRepository.js";
 
-export class ControladorDeAgendamento {
+export class ConsultasController {
   #consultasRepository = new ConsultasRepository();
 
   cadastrarAgendamento(cpfDoPaciente, data, horaInicial, horaFinal) {

@@ -1,8 +1,10 @@
 import { Paciente } from "../model/Paciente.js";
 import { PacientesRepository } from "../repository/PacientesRepository.js";
+import { PacientesService } from "../service/PacientesService.js";
 
 export class PacientesController {
   #pacientesRepository = new PacientesRepository();
+  #pacientesService = new PacientesService();
 
   adicionar(nome, cpf, data) {
     let novoPaciente = new Paciente(nome, cpf, data);
@@ -14,6 +16,6 @@ export class PacientesController {
   }
 
   excluirPaciente(cpf) {
-    this.#pacientesRepository.excluir(cpf);
+    this.#pacientesService.excluirPeloCpf(cpf);
   }
 }

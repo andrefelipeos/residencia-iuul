@@ -6,14 +6,14 @@ export class PacientesController {
 
   adicionar(nome, cpf, data) {
     let novoPaciente = new Paciente(nome, cpf, data);
-    this.#pacientesRepository.create(novoPaciente);
+    this.#pacientesRepository.cadastrar(novoPaciente);
   }
 
   recuperarListaDePacientes() {
-    return this.#pacientesRepository.getAll();
+    return this.#pacientesRepository.recuperarTodos();
   }
 
   excluirPaciente(cpf) {
-    this.#pacientesRepository.delete(cpf);
+    this.#pacientesRepository.excluir(cpf);
   }
 }

@@ -1,7 +1,8 @@
 import { Consulta } from "../modelos/Consulta.js";
+import { ConsultasRepository } from "../repository/ConsultasRepository.js";
 
 export class ControladorDeAgendamento {
-  #consultasRepository = new this.#consultasRepository();
+  #consultasRepository = new ConsultasRepository();
 
   cadastrarAgendamento(cpfDoPaciente, data, horaInicial, horaFinal) {
     const consulta = new Consulta(cpfDoPaciente, data, horaInicial, horaFinal);

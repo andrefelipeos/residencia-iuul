@@ -6,7 +6,8 @@ export class PacientesController {
   #pacientesRepository = new PacientesRepository();
   #pacientesService = new PacientesService();
 
-  adicionar(nome, cpf, data) {
+  adicionar(nome, cpf, dataStr) {
+    const data = new Date(dataStr.replace(/(\d{2})\/(\d{2})\/(\d{4})/g,"\$2\/\$1\/\$3"));
     let novoPaciente = new Paciente(nome, cpf, data);
     this.#pacientesRepository.cadastrar(novoPaciente);
   }

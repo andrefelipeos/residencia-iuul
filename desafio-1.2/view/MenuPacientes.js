@@ -57,11 +57,18 @@ export class MenuPacientes {
   }
 
   async #lerDataDeNascimentoDaEntrada() {
-    let data = await this.#rl.question("Data de nascimento: ");
-    while (!PacientesValidation.validarDataDeNascimento(data)) {
-      console.log("Data inválida!");
+    let data;
+    let dataInvalida = true;
+    do {
       data = await this.#rl.question("Data de nascimento: ");
-    }
+      if (!PacientesValidation.formatoDataValido(data)) {
+        console.log("Data inválida - datas devem estar no formato DD/MM/AAAA.");
+      } else if (!PacientesValidation.dataValida(data)) {
+        console.log("Data inválida.");
+      } else {
+        dataInvalida = false;
+      }
+    } while (dataInvalida);
     return data;
   }
 

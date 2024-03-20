@@ -6,13 +6,11 @@ export class PacientesService {
   #consultasRepository = new ConsultasRepository();
   #pacientesRepository = new PacientesRepository();
 
-  cadastrarNovoPaciente(nome, cpf, dataStr) {
+  cadastrarNovoPaciente(nome, cpf, dataDeNascimento) {
     if (this.#pacientesRepository.existePacienteCadastradoComCpf(cpf)) {
       console.log("Já existe um paciente cadastrado com o CPF informado.");
       return false;
     }
-    dataStr = dataStr.replace(/(\d{2})\/(\d{2})\/(\d{4})/g,"\$2\/\$1\/\$3");
-    const dataDeNascimento = new Date(dataStr);
     if (!this.#temTrezeAnosOuMais(dataDeNascimento)) {
       console.log("O paciente deve ter treze anos ou mais.");
       return false;

@@ -41,11 +41,18 @@ export class MenuPacientes {
   }
 
   async #lerCpfDaEntrada() {
-    let cpf = await this.#rl.question("CPF: ");
-    while (!PacientesValidation.validarCpf(cpf)) {
-      console.log("O CPF não é válido.");
-      cpf = await this.#rl.question("CPF: ")
-    }
+    let cpf;
+    let cpfInvalido = true;
+    do {
+      cpf = await this.#rl.question("CPF: ");
+      if (!PacientesValidation.formatoCpfValido(cpf)) {
+        console.log("CPF inválido – um CPF válido é formado por onze dígitos.");
+      } else if (!PacientesValidation.cpfValido(cpf)) {
+        console.log("CPF inválido.");
+      } else {
+        cpfInvalido = false;
+      }
+    } while (cpfInvalido);
     return cpf;
   }
 

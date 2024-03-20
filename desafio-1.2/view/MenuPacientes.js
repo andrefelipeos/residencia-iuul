@@ -1,4 +1,5 @@
 import { PacientesController } from "../controller/PacientesController.js";
+import { PacientesValidation } from "../validation/PacientesValidation.js";
 
 export class MenuPacientes {
   #rl;
@@ -24,10 +25,37 @@ export class MenuPacientes {
   }
 
   async #cadastrarNovoPaciente() {
-    const nome = await this.#rl.question("Nome: ");
-    const cpf = await this.#rl.question("CPF: ");
-    const dataDeNascimento = await this.#rl.question("Data de nascimento: ");
+    const nome = await this.#lerNomeDaEntrada();
+    const cpf = await this.#lerCpfDaEntrada();
+    const dataDeNascimento = await this.#lerDataDeNascimentoDaEntrada();
     this.#pacientesController.adicionar(nome, cpf, dataDeNascimento);
+  }
+
+  async #lerNomeDaEntrada() {
+    let nome = await this.#rl.question("Nome: ");
+    while (!PacientesValidation.tamanhoDoNomeValido(nome)) {
+      console.log("O nome do paciente deve ter pelo menos cinco caracteres.");
+      nome = await this.#rl.question("Nome: ");
+    }
+    return nome;
+  }
+
+  async #lerCpfDaEntrada() {
+    let cpf = await this.#rl.question("CPF: ");
+    while (!PacientesValidation.validarCpf(cpf)) {
+      console.log("O CPF não é válido.");
+      cpf = await this.#rl.question("CPF: ")
+    }
+    return cpf;
+  }
+
+  async #lerDataDeNascimentoDaEntrada() {
+    let data = await this.#rl.question("Data de nascimento: ");
+    while (!PacientesValidation.validarDataDeNascimento(data)) {
+      console.log("Data inválida!");
+      data = await this.#rl.question("Data de nascimento: ");
+    }
+    return data;
   }
 
   async #listarTodosOsPacientes() {

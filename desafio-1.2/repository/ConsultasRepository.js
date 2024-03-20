@@ -13,13 +13,13 @@ export class ConsultasRepository {
 
   excluirConsultasPassadasDeUmPaciente(cpf) {
     BancoDeDados.consultas = BancoDeDados.consultas.filter(consulta => {
-      return consulta.cpf !== cpf || consulta.data.getTime() >= Date.now().getTime();
+      return consulta.cpf !== cpf || consulta.data.getTime() >= Date.now();
     });
   }
 
   existeConsultaFuturaAgendadaParaPaciente(cpf) {
     return BancoDeDados.consultas.some(consulta => {
-      return consulta.cpf === cpf && consulta.data.getTime() >= Date.now().getTime();
+      return consulta.cpf === cpf && consulta.data.getTime() >= Date.now();
     });
   }
 

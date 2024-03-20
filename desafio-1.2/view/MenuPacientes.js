@@ -28,7 +28,11 @@ export class MenuPacientes {
     const nome = await this.#lerNomeDaEntrada();
     const cpf = await this.#lerCpfDaEntrada();
     const dataDeNascimento = await this.#lerDataDeNascimentoDaEntrada();
-    this.#pacientesController.adicionar(nome, cpf, dataDeNascimento);
+    if (this.#pacientesController.adicionar(nome, cpf, dataDeNascimento)) {
+      console.log("Paciente cadastro com sucesso.");
+    } else {
+      console.log("Paciente não pode ser cadastrado.");
+    }
   }
 
   async #lerNomeDaEntrada() {

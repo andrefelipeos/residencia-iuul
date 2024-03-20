@@ -1,7 +1,10 @@
-import { PacientesRepository } from "../repository/PacientesRepository";
+import { ConsultasRepository } from "../repository/ConsultasRepository.js";
+import { PacientesRepository } from "../repository/PacientesRepository.js";
 
 export class PacientesService {
-  #pacientesRepository = new PacientesRepository
+  #consultasRepository = new ConsultasRepository();
+  #pacientesRepository = new PacientesRepository();
+
   excluirPeloCpf(cpf) {
     if (this.#pacienteComConsultaAgendadaFutura(cpf)) {
       throw "Paciente com uma consulta agendada futura não pode ser excluído."
@@ -10,7 +13,11 @@ export class PacientesService {
     this.#pacientesRepository.excluir(cpf);
   }
 
-  #pacienteComConsultaAgendadaFutura(cpf) {}
+  #pacienteComConsultaAgendadaFutura(cpf) {
+    return this.#consultasRepository.existeConsultaFuturaAgendadaParaPaciente(cpf);
+  }
 
-  #excluirConsultasPassadas(cpf) {}
+  #excluirConsultasPassadas(cpf) {
+    this.#consultasRepository.excluirConsultasPassadasDeUmPaciente(cpf);
+  }
 }

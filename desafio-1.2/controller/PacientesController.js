@@ -1,10 +1,13 @@
 import { Paciente } from "../model/Paciente.js";
 import { PacientesRepository } from "../repository/PacientesRepository.js";
+import { PacientesService } from "../service/PacientesService.js";
 
 export class PacientesController {
   #pacientesRepository = new PacientesRepository();
+  #pacientesService = new PacientesService();
 
-  adicionar(nome, cpf, data) {
+  adicionar(nome, cpf, dataStr) {
+    const data = new Date(dataStr.replace(/(\d{2})\/(\d{2})\/(\d{4})/g,"\$2\/\$1\/\$3"));
     let novoPaciente = new Paciente(nome, cpf, data);
     this.#pacientesRepository.cadastrar(novoPaciente);
   }
@@ -14,6 +17,6 @@ export class PacientesController {
   }
 
   excluirPaciente(cpf) {
-    this.#pacientesRepository.excluir(cpf);
+    this.#pacientesService.excluirPeloCpf(cpf);
   }
 }

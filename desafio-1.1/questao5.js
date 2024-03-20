@@ -67,10 +67,7 @@ console.log("-----------------------------------");
 
 /* Funções auxiliares */
 function formatoValido(data) {
-  if (!/^[0-9]{2}\/[0-9]{2}\/[0-9]{4}/.test(data)) {
-    return false;
-  }
-  return true;
+  return /^[0-9]{2}\/[0-9]{2}\/[0-9]{4}/.test(data);
 }
 
 function maiorDeIdade(dataStr) {

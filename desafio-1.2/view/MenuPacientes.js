@@ -29,9 +29,9 @@ export class MenuPacientes {
     const cpf = await this.#lerCpfDaEntrada();
     const dataDeNascimento = await this.#lerDataDeNascimentoDaEntrada();
     if (this.#pacientesController.adicionar(nome, cpf, dataDeNascimento)) {
-      console.log("Paciente cadastro com sucesso.");
+      console.log("O paciente foi cadastrado com sucesso.");
     } else {
-      console.log("Paciente não pode ser cadastrado.");
+      console.log("O paciente não pode ser cadastrado.");
     }
   }
 

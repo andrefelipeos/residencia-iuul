@@ -9,6 +9,10 @@ export class PacientesRepository {
     BancoDeDados.pacientes = BancoDeDados.pacientes.filter(paciente => paciente.cpf != cpf);
   }
 
+  existePacienteCadastradoComCpf(cpf) {
+    return BancoDeDados.pacientes.some(paciente => paciente.cpf === cpf);
+  }
+
   recuperarTodos() {
     return BancoDeDados.pacientes;
   }

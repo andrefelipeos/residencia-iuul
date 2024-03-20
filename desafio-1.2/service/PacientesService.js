@@ -7,6 +7,10 @@ export class PacientesService {
   #pacientesRepository = new PacientesRepository();
 
   cadastrarNovoPaciente(nome, cpf, dataStr) {
+    if (this.#pacientesRepository.existePacienteCadastradoComCpf(cpf)) {
+      console.log("Já existe um paciente cadastrado com o CPF informado.");
+      return false;
+    }
     dataStr = dataStr.replace(/(\d{2})\/(\d{2})\/(\d{4})/g,"\$2\/\$1\/\$3");
     const dataDeNascimento = new Date(dataStr);
     if (!this.#temTrezeAnosOuMais(dataDeNascimento)) {

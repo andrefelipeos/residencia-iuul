@@ -1,23 +1,20 @@
-import * as readline from "node:readline/promises";
-import { stdin as input, stdout as output } from "node:process";
-
+import { LeitorDadosTerminal } from "../utils/LeitorDadosTerminal.js";
 import { MenuConsultas } from "./MenuConsultas.js";
 import { MenuPacientes } from "./MenuPacientes.js";
 
 export class MenuPrincipal {
-  #rl = readline.createInterface({ input, output });
-  #menuConsultas = new MenuConsultas(this.#rl);
-  #menuPacientes = new MenuPacientes(this.#rl)
+  #menuConsultas = new MenuConsultas();
+  #menuPacientes = new MenuPacientes()
 
   async iniciar() {
     while (true) {
       this.#listarOpcoes();
-      let escolha = await this.#rl.question("O que você quer fazer? ");
+      let escolha = await LeitorDadosTerminal.lerOpcaoDeMenu();
       if (escolha === "1") await this.#menuPacientes.executar();
       if (escolha === "2") await this.#menuConsultas.executar();
       if (escolha === "3") break;
     }
-    this.#rl.close();
+    LeitorDadosTerminal.encerrarRecursos();
   }
 
   #listarOpcoes() {

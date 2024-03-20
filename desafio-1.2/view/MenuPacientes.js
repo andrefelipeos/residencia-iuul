@@ -1,17 +1,12 @@
+import { LeitorDadosTerminal } from "../utils/LeitorDadosTerminal.js";
 import { PacientesController } from "../controller/PacientesController.js";
-import { PacientesValidation } from "../validation/PacientesValidation.js";
 
 export class MenuPacientes {
-  #rl;
   #pacientesController = new PacientesController();
-
-  constructor(readliner) {
-    this.#rl = readliner;
-  }
 
   async executar() {
     this.#listarOpcoes();
-    let escolha = await this.#rl.question("O que você quer fazer? ");
+    let escolha = await LeitorDadosTerminal.lerOpcaoDeMenu();
     if (escolha === "1") await this.#cadastrarNovoPaciente();
     if (escolha === "2") await this.#listarTodosOsPacientes();
     if (escolha === "3") await this.#removerUmPaciente();
@@ -25,55 +20,14 @@ export class MenuPacientes {
   }
 
   async #cadastrarNovoPaciente() {
-    const nome = await this.#lerNomeDaEntrada();
-    const cpf = await this.#lerCpfDaEntrada();
-    const dataDeNascimento = await this.#lerDataDeNascimentoDaEntrada();
+    const nome = await LeitorDadosTerminal.lerNome();
+    const cpf = await LeitorDadosTerminal.lerCpf();
+    const dataDeNascimento = await LeitorDadosTerminal.lerData("Data de nascimento: ");
     if (this.#pacientesController.adicionar(nome, cpf, dataDeNascimento)) {
       console.log("O paciente foi cadastrado com sucesso.");
     } else {
       console.log("O paciente não pode ser cadastrado.");
     }
-  }
-
-  async #lerNomeDaEntrada() {
-    let nome = await this.#rl.question("Nome: ");
-    while (!PacientesValidation.tamanhoDoNomeValido(nome)) {
-      console.log("O nome do paciente deve ter pelo menos cinco caracteres.");
-      nome = await this.#rl.question("Nome: ");
-    }
-    return nome;
-  }
-
-  async #lerCpfDaEntrada() {
-    let cpf;
-    let cpfInvalido = true;
-    do {
-      cpf = await this.#rl.question("CPF: ");
-      if (!PacientesValidation.formatoCpfValido(cpf)) {
-        console.log("CPF inválido – um CPF válido é formado por onze dígitos.");
-      } else if (!PacientesValidation.cpfValido(cpf)) {
-        console.log("CPF inválido.");
-      } else {
-        cpfInvalido = false;
-      }
-    } while (cpfInvalido);
-    return cpf;
-  }
-
-  async #lerDataDeNascimentoDaEntrada() {
-    let data;
-    let dataInvalida = true;
-    do {
-      data = await this.#rl.question("Data de nascimento: ");
-      if (!PacientesValidation.formatoDataValido(data)) {
-        console.log("Data inválida - datas devem estar no formato DD/MM/AAAA.");
-      } else if (!PacientesValidation.dataValida(data)) {
-        console.log("Data inválida.");
-      } else {
-        dataInvalida = false;
-      }
-    } while (dataInvalida);
-    return data;
   }
 
   async #listarTodosOsPacientes() {
@@ -84,7 +38,7 @@ export class MenuPacientes {
   }
 
   async #removerUmPaciente() {
-    const cpf = await this.#lerCpfDaEntrada();
+    const cpf = await LeitorDadosTerminal.lerCpf();
     if (this.#pacientesController.excluirPaciente(cpf)) {
       console.log("Paciente removido com sucesso.");
     } else {

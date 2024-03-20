@@ -1,16 +1,12 @@
 import { ConsultasController } from "../controller/ConsultasController.js";
+import { LeitorDadosTerminal } from "../utils/LeitorDadosTerminal.js";
 
 export class MenuConsultas {
-  #rl;
   #consultasController = new ConsultasController();
-
-  constructor(readliner) {
-    this.#rl = readliner;
-  }
 
   async executar() {
     this.#listarOpcoes();
-    let escolha = await this.#rl.question("O que você deseja fazer? ");
+    let escolha = await LeitorDadosTerminal.lerOpcaoDeMenu();
     if (escolha === "1") await this.#agendarConsulta();
     if (escolha === "2") await this.#listarConsultas();
     if (escolha === "3") await this.#cancelarAgendamento();
@@ -24,10 +20,10 @@ export class MenuConsultas {
   }
 
   async #agendarConsulta() {
-    const cpf = await this.#rl.question("Qual o CPF do paciente? ");
-    const data = await this.#rl.question("Qual a data da consulta? ");
-    const horaInicial = await this.#rl.question("Que horas começa a consulta? ");
-    const horaFinal = await this.#rl.question("Que horas termina a consulta? ");
+    const cpf = await LeitorDadosTerminal.lerCpf();
+    const data = await LeitorDadosTerminal.lerData();
+    const horaInicial = await LeitorDadosTerminal.lerHorario("Horário inicial: ");
+    const horaFinal = await LeitorDadosTerminal.lerHorario("Horário final: ");
     this.#consultasController.cadastrarAgendamento(cpf, data, horaInicial, horaFinal);
   }
 
@@ -39,9 +35,9 @@ export class MenuConsultas {
   }
 
   async #cancelarAgendamento() {
-    const cpf = await this.#rl.question("Qual o CPF do paciente? ");
-    const data = await this.#rl.question("Qual a data da consulta? ");
-    const hora = await this.#rl.question("Qual o horário da consulta? ");
+    const cpf = await LeitorDadosTerminal.lerCpf();
+    const data = await LeitorDadosTerminal.lerData();
+    const hora = await LeitorDadosTerminal.lerHorario();
     this.#consultasController.removerAgendamento(cpf, data, hora);
   }
 }

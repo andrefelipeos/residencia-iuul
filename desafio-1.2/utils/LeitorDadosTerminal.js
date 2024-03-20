@@ -1,6 +1,8 @@
 import * as readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 
+import { PacientesValidation } from "../validation/PacientesValidation.js";
+
 export class LeitorDadosTerminal {
   static #rl = readline.createInterface({ input, output });
 

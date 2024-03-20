@@ -84,7 +84,11 @@ export class MenuPacientes {
   }
 
   async #removerUmPaciente() {
-    const cpf = await this.#rl.question("CPF: ");
-    this.#pacientesController.excluirPaciente(cpf);
+    const cpf = await this.#lerCpfDaEntrada();
+    if (this.#pacientesController.excluirPaciente(cpf)) {
+      console.log("Paciente removido com sucesso.");
+    } else {
+      console.log("Não foi possível remover o paciente.");
+    }
   }
 }

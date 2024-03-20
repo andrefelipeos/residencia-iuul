@@ -16,6 +16,6 @@ export class PacientesController {
   }
 
   excluirPaciente(cpf) {
-    this.#pacientesService.excluirPeloCpf(cpf);
+    return this.#pacientesService.excluirPeloCpf(cpf);
   }
 }

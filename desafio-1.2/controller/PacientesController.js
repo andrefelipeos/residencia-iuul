@@ -1,4 +1,3 @@
-import { Paciente } from "../model/Paciente.js";
 import { PacientesRepository } from "../repository/PacientesRepository.js";
 import { PacientesService } from "../service/PacientesService.js";
 

@@ -1,0 +1,19 @@
+{
+  "name": "currency-converter",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Using the 'Exchange Rate' public API to convert values between currencies",
+  "main": "conversor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "public-api",
+    "currency-converter"
+  ],
+  "author": "André Felipe",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}

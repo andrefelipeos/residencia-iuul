@@ -15,5 +15,8 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.4"
   }
 }

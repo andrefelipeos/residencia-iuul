@@ -1,4 +1,4 @@
-export class ConversionData {
+export interface ConversionData {
   initialCurrency: string;
   targetCurrency: string;
   amount: number;

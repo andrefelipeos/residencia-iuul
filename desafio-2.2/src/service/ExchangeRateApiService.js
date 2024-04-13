@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 export class ExchangeRateApiService {
   API_KEY = process.env.EXCHANGE_RATE_API_KEY;
   API_URL = `https://v6.exchangerate-api.com/v6/${this.API_KEY}/pair`;

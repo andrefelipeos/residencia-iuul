@@ -9,7 +9,7 @@ export class ConversionController {
     private readonly conversionView: ConversionView
   ) {};
 
-  public async run() {
+  public async run(): Promise<void> {
     let userWantsToContinue: boolean;
     do {
       const conversionData: ConversionData = await this.conversionView.getUserInput();

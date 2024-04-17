@@ -9,5 +9,5 @@ const conversionView: ConversionView = new ConversionView(inputReader);
 const exchangeRateApiService: ExchangeRateApiService = new ExchangeRateApiService();
 const conversionController: ConversionController = new ConversionController(exchangeRateApiService, conversionView);
 
-conversionController.run();
+conversionController.run().then(() => inputReader.closeResources());
 

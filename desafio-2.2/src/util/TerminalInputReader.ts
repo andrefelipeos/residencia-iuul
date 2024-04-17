@@ -8,6 +8,10 @@ export class TerminalInputReader implements InputReader {
     output: process.stdout
   });
 
+  public closeResources(): void {
+    this.rl.close();
+  }
+
   public async getNumber(message: string = "Number:"): Promise<number> {
     return await this.rl.question(message).then(input => parseFloat(input));
   }

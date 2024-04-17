@@ -1,7 +1,6 @@
 {
   "name": "currency-converter",
   "version": "1.0.0",
-  "type": "module",
   "description": "Using the 'Exchange Rate' public API to convert values between currencies",
   "main": "conversor.js",
   "scripts": {

@@ -20,7 +20,7 @@ export class ConversionView {
     return userInput;
   }
 
-  public presetConversionResult(conversionResult: FulfilledConversionData) {
+  public presentConversionResult(conversionResult: FulfilledConversionData) {
     console.log(conversionResult.initialCurrency, conversionResult.amount, "=>",
       conversionResult.targetCurrency, conversionResult.conversionResult);
     console.log("Taxa:", conversionResult.conversionRate);

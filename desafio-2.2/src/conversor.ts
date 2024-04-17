@@ -1,13 +1,13 @@
-import { ConversionController } from "./controller/ConversionController.js";
+import { ConversionController } from "src/controller/ConversionController";
 import { ConversionView } from "src/view/ConversionView";
-import { ExchangeRateApiService } from "./service/ExchangeRateApiService.js";
+import { ExchangeRateApiService } from "src/service/ExchangeRateApiService";
 import { InputReader } from "src/util/InputReader";
 import { TerminalInputReader } from "src/util/TerminalInputReader";
 
 const inputReader: InputReader = new TerminalInputReader();
-const conversionView = new ConversionView(inputReader);
-const exchangeRateApiService = new ExchangeRateApiService();
-const conversionController = new ConversionController(conversionView);
+const conversionView: ConversionView = new ConversionView(inputReader);
+const exchangeRateApiService: ExchangeRateApiService = new ExchangeRateApiService();
+const conversionController: ConversionController = new ConversionController(exchangeRateApiService, conversionView);
 
 conversionController.run();
 

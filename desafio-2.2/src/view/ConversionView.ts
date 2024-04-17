@@ -9,8 +9,11 @@ export class ConversionView {
     const promptMessage: string = "Digite '1' para fazer uma nova conversão."
       + "\nQualquer outra coisa encerrará o programa.\n> ";
     const input: string = await this.inputReader.getString(promptMessage);
-    if (input === "1") return true;
-    else return false;
+    if (input === "1") {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   public async getUserInput(): Promise<ConversionData> {

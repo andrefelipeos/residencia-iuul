@@ -13,11 +13,10 @@ export class ConversionView {
   }
 
   public async getUserInput(): Promise<ConversionData> {
-    let userInput: ConversionData;
-    userInput.initialCurrency = await this.inputReader.getString();
-    userInput.targetCurrency = await this.inputReader.getString();
-    userInput.amount = await this.inputReader.getNumber();
-    return userInput;
+    const initialCurrency = await this.inputReader.getString();
+    const targetCurrency = await this.inputReader.getString();
+    const amount = await this.inputReader.getNumber();
+    return { initialCurrency, targetCurrency, amount };
   }
 
   public presentConversionResult(conversionResult: FulfilledConversionData) {

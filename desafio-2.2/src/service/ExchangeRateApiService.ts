@@ -1,6 +1,6 @@
 import "dotenv/config";
 
-import { ConversionData } from "src/model/ConversionData";
+import { ConversionData } from "../model/ConversionData";
 
 export class ExchangeRateApiService {
   API_KEY = process.env.EXCHANGE_RATE_API_KEY;

@@ -1,6 +1,6 @@
-import { ConversionData } from "src/model/ConversionData";
-import { FulfilledConversionData } from "src/model/FulfilledConversionData";
-import { InputReader } from "src/util/InputReader";
+import { ConversionData } from "../model/ConversionData";
+import { FulfilledConversionData } from "../model/FulfilledConversionData";
+import { InputReader } from "../util/InputReader";
 
 export class ConversionView {
   constructor(private readonly inputReader: InputReader) {}

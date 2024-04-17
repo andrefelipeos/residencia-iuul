@@ -1,6 +1,6 @@
 import * as readline from "node:readline/promises";
 
-import { InputReader } from "src/util/InputReader";
+import { InputReader } from "./InputReader";
 
 export class TerminalInputReader implements InputReader {
   private rl = readline.createInterface({

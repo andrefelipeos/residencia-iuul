@@ -1,7 +1,7 @@
-import { ConversionData } from "src/model/ConversionData";
-import { ConversionView } from "src/view/ConversionView";
-import { ExchangeRateApiService } from "src/service/ExchangeRateApiService";
-import { FulfilledConversionData } from "src/model/FulfilledConversionData";
+import { ConversionData } from "../model/ConversionData";
+import { ConversionView } from "../view/ConversionView";
+import { ExchangeRateApiService } from "../service/ExchangeRateApiService";
+import { FulfilledConversionData } from "../model/FulfilledConversionData";
 
 export class ConversionController {
   constructor(

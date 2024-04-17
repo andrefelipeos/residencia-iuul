@@ -1,4 +1,4 @@
-import { ConversionData } from "src/model/ConversionData";
+import { ConversionData } from "./ConversionData";
 
 export interface FulfilledConversionData extends ConversionData {
   conversionRate: number;

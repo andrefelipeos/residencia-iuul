@@ -24,9 +24,9 @@ export class ConversionView {
   }
 
   public presentConversionResult(conversionResult: FulfilledConversionData) {
-    console.log(conversionResult.initialCurrency, conversionResult.amount, "=>",
-      conversionResult.targetCurrency, conversionResult.conversionResult);
-    console.log("Taxa:", conversionResult.conversionRate);
+    console.log(conversionResult.initialCurrency, conversionResult.amount.toFixed(2), "=>",
+      conversionResult.targetCurrency, conversionResult.conversionResult.toFixed(2));
+    console.log("Taxa:", conversionResult.conversionRate.toFixed(6));
   }
 }
 

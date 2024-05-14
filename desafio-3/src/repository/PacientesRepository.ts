@@ -1,19 +1,21 @@
-import { BancoDeDados } from "../BancoDeDados.js";
+import { BancoDeDados } from "../../BancoDeDados.js";
+import { Paciente } from "../model/Paciente.js";
 
 export class PacientesRepository {
-  cadastrar(paciente) {
+  cadastrar(paciente: Paciente): void{
     BancoDeDados.pacientes.push(paciente);
   }
 
-  excluir(cpf) {
+  excluir(cpf: string): void {
     BancoDeDados.pacientes = BancoDeDados.pacientes.filter(paciente => paciente.cpf != cpf);
   }
 
-  existePacienteCadastradoComCpf(cpf) {
+  existePacienteCadastradoComCpf(cpf: string): boolean {
     return BancoDeDados.pacientes.some(paciente => paciente.cpf === cpf);
   }
 
-  recuperarTodos() {
+  recuperarTodos(): Array<Paciente> {
     return BancoDeDados.pacientes;
   }
 }
+

@@ -4,34 +4,34 @@ import { stdin as input, stdout as output } from "node:process";
 import { PacientesValidation } from "../validation/PacientesValidation.js";
 
 export class LeitorDadosTerminal {
-  static #rl = readline.createInterface({ input, output });
+  private static rl = readline.createInterface({ input, output });
 
-  static encerrarRecursos() {
-    LeitorDadosTerminal.#rl.close();
+  static encerrarRecursos(): void {
+    LeitorDadosTerminal.rl.close();
   }
 
-  static async lerOpcaoDeMenu(mensagem = "O que você deseja fazer? ") {
-    return await LeitorDadosTerminal.#rl.question(mensagem);
+  static async lerOpcaoDeMenu(mensagem: string = "O que você deseja fazer? "): Promise<string> {
+    return await LeitorDadosTerminal.rl.question(mensagem);
   }
 
-  static async lerHorario(mensagem = "Horário: ") {
-    return await LeitorDadosTerminal.#rl.question(mensagem);
+  static async lerHorario(mensagem: string = "Horário: "): Promise<string> {
+    return await LeitorDadosTerminal.rl.question(mensagem);
   }
 
-  static async lerNome(mensagem = "Nome: ") {
-    let nome = await LeitorDadosTerminal.#rl.question(mensagem);
+  static async lerNome(mensagem: string = "Nome: "): Promise<string> {
+    let nome: string = await LeitorDadosTerminal.rl.question(mensagem);
     while (!PacientesValidation.tamanhoDoNomeValido(nome)) {
       console.log("O nome do paciente deve ter pelo menos cinco caracteres.");
-      nome = await LeitorDadosTerminal.#rl.question(mensagem);
+      nome = await LeitorDadosTerminal.rl.question(mensagem);
     }
     return nome;
   }
 
-  static async lerCpf(mensagem = "CPF: ") {
-    let cpf;
-    let cpfInvalido = true;
+  static async lerCpf(mensagem: string = "CPF: "): Promise<string> {
+    let cpf: string;
+    let cpfInvalido: boolean = true;
     do {
-      cpf = await LeitorDadosTerminal.#rl.question(mensagem);
+      cpf = await LeitorDadosTerminal.rl.question(mensagem);
       if (!PacientesValidation.formatoCpfValido(cpf)) {
         console.log("CPF inválido – um CPF válido é formado por onze dígitos.");
       } else if (!PacientesValidation.cpfValido(cpf)) {
@@ -43,11 +43,11 @@ export class LeitorDadosTerminal {
     return cpf;
   }
 
-  static async lerData(mensagem = "Data: ") {
-    let data;
-    let dataInvalida = true;
+  static async lerData(mensagem: string = "Data: "): Promise<string> {
+    let data: string;
+    let dataInvalida: boolean = true;
     do {
-      data = await LeitorDadosTerminal.#rl.question(mensagem);
+      data = await LeitorDadosTerminal.rl.question(mensagem);
       if (!PacientesValidation.formatoDataValido(data)) {
         console.log("Data inválida - datas devem estar no formato DD/MM/AAAA.");
       } else if (!PacientesValidation.dataValida(data)) {
@@ -59,3 +59,4 @@ export class LeitorDadosTerminal {
     return data;
   }
 }
+

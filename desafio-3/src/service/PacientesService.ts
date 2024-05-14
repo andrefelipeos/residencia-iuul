@@ -21,7 +21,7 @@ export class PacientesService {
   }
 
   private temTrezeAnosOuMais(dataDeNascimento: Date): boolean {
-    //if (isNaN(dataDeNascimento)) throw "Data inválida."
+    if (isNaN(dataDeNascimento.getTime())) throw "Data inválida."
     if (this.calcularIdade(dataDeNascimento) >= 13) return true;
     else return false;
   }

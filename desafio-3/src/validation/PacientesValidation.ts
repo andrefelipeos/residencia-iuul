@@ -36,8 +36,8 @@ export class PacientesValidation {
       throw "Data inválida - datas devem estar no formato DD/MM/AAAA.";
     }
     dataStr = dataStr.replace(/(\d{2})\/(\d{2})\/(\d{4})/g,"\$2\/\$1\/\$3");
-    //if (isNaN(new Date(dataStr))) return false;
-    return true;
+    if (isNaN((new Date(dataStr)).getTime())) return false;
+    else return true;
   }
 }
 

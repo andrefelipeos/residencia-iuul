@@ -1,3 +1,15 @@
 {
-  "type": "module"
+  "name": "desafio-3",
+  "version": "1.0.0",
+  "description": "Um gerenciador de pacientes e consultas de um consultório médico.",
+  "main": "build/App.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "André Felipe",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
 }

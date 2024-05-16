@@ -25,7 +25,7 @@ Paciente.init(
       allowNull: false,
     },
     dataDeNascimento: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
   },

@@ -35,3 +35,7 @@ Paciente.init(
   },
 );
 
+(async () => {
+  await sequelize.sync({ force: true });
+})();
+

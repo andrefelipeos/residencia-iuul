@@ -6,18 +6,19 @@ export class PacientesService {
   private consultasRepository: ConsultasRepository = new ConsultasRepository();
   private pacientesRepository: PacientesRepository = new PacientesRepository();
 
-  cadastrarNovoPaciente(nome: string, cpf: string, dataDeNascimento: Date): boolean {
+  async cadastrarNovoPaciente(nome: string, cpf: string, dataDeNascimento: Date): Promise<Paciente | null> {
     if (this.pacientesRepository.existePacienteCadastradoComCpf(cpf)) {
       console.log("Já existe um paciente cadastrado com o CPF informado.");
-      return false;
+      return null;
     }
     if (!this.temTrezeAnosOuMais(dataDeNascimento)) {
       console.log("O paciente deve ter treze anos ou mais.");
-      return false;
+      return null;
     }
-    const novoPaciente = new Paciente({ nome, cpf, dataDeNascimento });
-    this.pacientesRepository.cadastrar(novoPaciente);
-    return true;
+    //const novoPaciente = new Paciente({ nome, cpf, dataDeNascimento });
+    //this.pacientesRepository.cadastrar(novoPaciente);
+    const novoPaciente: Paciente = Paciente.build({ nome, cpf, dataDeNascimento });
+    return this.pacientesRepository.cadastrar(novoPaciente);
   }
 
   private temTrezeAnosOuMais(dataDeNascimento: Date): boolean {

@@ -2,8 +2,8 @@ import { BancoDeDados } from "../../BancoDeDados.js";
 import { Paciente } from "../model/Paciente.js";
 
 export class PacientesRepository {
-  cadastrar(paciente: Paciente): void{
-    BancoDeDados.pacientes.push(paciente);
+  async cadastrar(paciente: Paciente): Promise<Paciente> {
+    return paciente.save();
   }
 
   excluir(cpf: string): void {

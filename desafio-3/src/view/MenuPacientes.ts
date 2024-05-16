@@ -24,7 +24,7 @@ export class MenuPacientes {
     const nome: string = await LeitorDadosTerminal.lerNome();
     const cpf: string = await LeitorDadosTerminal.lerCpf();
     const dataDeNascimento: string = await LeitorDadosTerminal.lerData("Data de nascimento: ");
-    if (this.pacientesController.adicionar(nome, cpf, dataDeNascimento)) {
+    if ((await this.pacientesController.adicionar(nome, cpf, dataDeNascimento)) !== null) {
       console.log("O paciente foi cadastrado com sucesso.");
     } else {
       console.log("O paciente não pode ser cadastrado.");

@@ -7,7 +7,7 @@ export class PacientesService {
   private pacientesRepository: PacientesRepository = new PacientesRepository();
 
   async cadastrarNovoPaciente(nome: string, cpf: string, dataDeNascimento: Date): Promise<Paciente | null> {
-    if (this.pacientesRepository.existePacienteCadastradoComCpf(cpf)) {
+    if (await this.pacientesRepository.existePacienteCadastradoComCpf(cpf)) {
       console.log("Já existe um paciente cadastrado com o CPF informado.");
       return null;
     }
@@ -38,12 +38,10 @@ export class PacientesService {
   }
 
   async excluirPeloCpf(cpf: string): Promise<boolean> {
-    /*
-    if (!this.pacientesRepository.existePacienteCadastradoComCpf(cpf)) {
+    if (!await this.pacientesRepository.existePacienteCadastradoComCpf(cpf)) {
       console.log("Não existe um paciente cadastrado com o CPF informado.");
       return false;
     }
-    */
     if (this.pacienteTemConsultaAgendadaFutura(cpf)) {
       console.log("Paciente com uma consulta agendada futura não pode ser excluído.");
       return false;

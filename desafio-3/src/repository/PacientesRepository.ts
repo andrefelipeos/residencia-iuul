@@ -7,7 +7,6 @@ export class PacientesRepository {
   }
 
   excluir(cpf: string): void {
-    //BancoDeDados.pacientes = BancoDeDados.pacientes.filter(paciente => paciente.cpf != cpf);
     Paciente.destroy({
       where: {
         cpf: cpf,
@@ -15,8 +14,12 @@ export class PacientesRepository {
     });
   }
 
-  existePacienteCadastradoComCpf(cpf: string): boolean {
-    return BancoDeDados.pacientes.some(paciente => paciente.cpf === cpf);
+  async existePacienteCadastradoComCpf(cpf: string): Promise<boolean> {
+    return await Paciente.findOne({
+      where: {
+        cpf: cpf,
+      },
+    }) != null;
   }
 
   async recuperarTodos(): Promise<Array<Paciente>> {

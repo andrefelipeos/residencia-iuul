@@ -15,8 +15,6 @@ export class PacientesService {
       console.log("O paciente deve ter treze anos ou mais.");
       return null;
     }
-    //const novoPaciente = new Paciente({ nome, cpf, dataDeNascimento });
-    //this.pacientesRepository.cadastrar(novoPaciente);
     const novoPaciente: Paciente = Paciente.build({ nome, cpf, dataDeNascimento });
     return this.pacientesRepository.cadastrar(novoPaciente);
   }

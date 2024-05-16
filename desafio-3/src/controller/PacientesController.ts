@@ -15,8 +15,8 @@ export class PacientesController {
     return await this.pacientesRepository.recuperarTodos();
   }
 
-  excluirPaciente(cpf: string): boolean {
-    return this.pacientesService.excluirPeloCpf(cpf);
+  async excluirPaciente(cpf: string): Promise<boolean> {
+    return await this.pacientesService.excluirPeloCpf(cpf);
   }
 }
 

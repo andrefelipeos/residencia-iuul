@@ -7,7 +7,12 @@ export class PacientesRepository {
   }
 
   excluir(cpf: string): void {
-    BancoDeDados.pacientes = BancoDeDados.pacientes.filter(paciente => paciente.cpf != cpf);
+    //BancoDeDados.pacientes = BancoDeDados.pacientes.filter(paciente => paciente.cpf != cpf);
+    Paciente.destroy({
+      where: {
+        cpf: cpf,
+      },
+    });
   }
 
   existePacienteCadastradoComCpf(cpf: string): boolean {

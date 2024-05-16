@@ -37,17 +37,19 @@ export class PacientesService {
     return idade;
   }
 
-  excluirPeloCpf(cpf: string): boolean {
+  async excluirPeloCpf(cpf: string): Promise<boolean> {
+    /*
     if (!this.pacientesRepository.existePacienteCadastradoComCpf(cpf)) {
       console.log("Não existe um paciente cadastrado com o CPF informado.");
       return false;
     }
+    */
     if (this.pacienteTemConsultaAgendadaFutura(cpf)) {
       console.log("Paciente com uma consulta agendada futura não pode ser excluído.");
       return false;
     }
     this.excluirConsultasPassadas(cpf);
-    this.pacientesRepository.excluir(cpf);
+    await this.pacientesRepository.excluir(cpf);
     return true;
   }
 

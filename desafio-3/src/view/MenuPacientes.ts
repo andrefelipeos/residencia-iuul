@@ -40,7 +40,7 @@ export class MenuPacientes {
 
   private async removerUmPaciente(): Promise<void> {
     const cpf: string = await LeitorDadosTerminal.lerCpf();
-    if (this.pacientesController.excluirPaciente(cpf)) {
+    if (await this.pacientesController.excluirPaciente(cpf)) {
       console.log("Paciente removido com sucesso.");
     } else {
       console.log("Não foi possível remover o paciente.");

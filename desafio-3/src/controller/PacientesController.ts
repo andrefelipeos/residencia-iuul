@@ -11,8 +11,8 @@ export class PacientesController {
     return this.pacientesService.cadastrarNovoPaciente(nome, cpf, new Date(dataStr));
   }
 
-  recuperarListaDePacientes(): Array<Paciente> {
-    return this.pacientesRepository.recuperarTodos();
+  async recuperarListaDePacientes(): Promise<Array<Paciente>> {
+    return await this.pacientesRepository.recuperarTodos();
   }
 
   excluirPaciente(cpf: string): boolean {

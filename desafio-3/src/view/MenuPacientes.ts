@@ -32,7 +32,7 @@ export class MenuPacientes {
   }
 
   private async listarTodosOsPacientes(): Promise<void> {
-    const pacientes: Array<Paciente> = this.pacientesController.recuperarListaDePacientes();
+    const pacientes: Array<Paciente> = await this.pacientesController.recuperarListaDePacientes();
     pacientes.forEach(paciente => {
       console.log(paciente.nome, paciente.cpf, paciente.dataDeNascimento);
     });

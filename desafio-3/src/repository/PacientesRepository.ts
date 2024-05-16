@@ -14,8 +14,8 @@ export class PacientesRepository {
     return BancoDeDados.pacientes.some(paciente => paciente.cpf === cpf);
   }
 
-  recuperarTodos(): Array<Paciente> {
-    return BancoDeDados.pacientes;
+  async recuperarTodos(): Promise<Array<Paciente>> {
+    return await Paciente.findAll();
   }
 }
 
